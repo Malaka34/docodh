@@ -536,26 +536,15 @@ Voici des exemples de comment faire :</p>
 <h3>a- Fichier des Modalités<a class="headerlink" href="#a-fichier-des-modalites" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
 <span class="n">Modalites</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="n">nom_Fichier_Modalite</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_59228</span><span class="o">/</span><span class="mf">1877607770.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Modalites</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="n">nom_Fichier_Modalite</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;pd&#39; is not defined
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
 <span class="n">Modalites</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;codemodalid&#39;</span><span class="p">:</span><span class="s1">&#39;CodeModalID&#39;</span><span class="p">,</span> <span class="s1">&#39;categ_regroupement&#39;</span><span class="p">:</span><span class="s1">&#39;Categ_regroupement&#39;</span><span class="p">,</span> <span class="s1">&#39;libelle_long	&#39;</span><span class="p">:</span><span class="s1">&#39;Libelle_long&#39;</span><span class="p">,</span> <span class="s1">&#39;codemodalext&#39;</span><span class="p">:</span><span class="s1">&#39;CodeModalEXT&#39;</span><span class="p">,</span> <span class="s1">&#39;libellemodal&#39;</span><span class="p">:</span><span class="s1">&#39;LibelleModal&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -563,7 +552,7 @@ Voici des exemples de comment faire :</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
 <span class="n">Modalites</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="n">nom_Fichier_Modalite</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -574,7 +563,7 @@ Voici des exemples de comment faire :</p>
 <h3>b-Fichier des Variables<a class="headerlink" href="#b-fichier-des-variables" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
 <span class="n">Variables</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="n">nom_Fichier_Variable</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -582,7 +571,7 @@ Voici des exemples de comment faire :</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
 <span class="n">Variables</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;codevarid&#39;</span><span class="p">:</span><span class="s1">&#39;CodeVarID&#39;</span><span class="p">,</span><span class="s1">&#39;libaxeanalyse&#39;</span><span class="p">:</span><span class="s1">&#39;LibAxeAnalyse&#39;</span><span class="p">,</span><span class="s1">&#39;origine&#39;</span><span class="p">:</span><span class="s1">&#39;Origine&#39;</span><span class="p">,</span><span class="s1">&#39;codevarext&#39;</span><span class="p">:</span><span class="s1">&#39;CodeVarEXT&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -590,7 +579,7 @@ Voici des exemples de comment faire :</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
 <span class="n">Variables</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="n">nom_Fichier_Variable</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -601,7 +590,7 @@ Voici des exemples de comment faire :</p>
 <h3>c- Fichier de jointure Posseder<a class="headerlink" href="#c-fichier-de-jointure-posseder" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement du fichier des modalités (explain all the params)</span>
 <span class="n">Posseder</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="s1">&#39;posseder_aides_personne.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -609,7 +598,7 @@ Voici des exemples de comment faire :</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># renommage des colonnes (explain why ?)</span>
 <span class="n">Posseder</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;codevarid&#39;</span><span class="p">:</span><span class="s1">&#39;CodeVarID&#39;</span><span class="p">,</span><span class="s1">&#39;codemodalid&#39;</span><span class="p">:</span><span class="s1">&#39;CodeModalID&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -617,7 +606,7 @@ Voici des exemples de comment faire :</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enregistrement des modifications</span>
 <span class="n">Posseder</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_vars</span><span class="o">+</span><span class="s1">&#39;posseder_aides_personne.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -630,7 +619,7 @@ Voici des exemples de comment faire :</p>
 <p>Cette erreur se produit lorsque vous essayez d’ouvrir un fichier avec l’encodage <strong><code class="docutils literal notranslate"><span class="pre">utf-8</span></code></strong>, alors qu’il est encodé différement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;utf-8&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xe9 in position 1665: invalid continuation byte</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;utf-8&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xe9 in position 1665: invalid continuation byte</span>
 </pre></div>
 </div>
 </div>
@@ -642,7 +631,7 @@ Voici des exemples de comment faire :</p>
 <p>Lorsque vous rencontrez sur ce type d’erreur comme par exemple :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ne">FileExistsError</span><span class="p">:</span> <span class="p">[</span><span class="n">WinError</span> <span class="mi">183</span><span class="p">]</span> <span class="n">Impossible</span> <span class="n">de</span> <span class="n">créer</span> <span class="n">un</span> <span class="n">fichier</span> <span class="n">déjà</span> <span class="n">existant</span><span class="p">:</span> <span class="s1">&#39;DossierFichiersTraités&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">FileExistsError</span><span class="p">:</span> <span class="p">[</span><span class="n">WinError</span> <span class="mi">183</span><span class="p">]</span> <span class="n">Impossible</span> <span class="n">de</span> <span class="n">créer</span> <span class="n">un</span> <span class="n">fichier</span> <span class="n">déjà</span> <span class="n">existant</span><span class="p">:</span> <span class="s1">&#39;DossierFichiersTraités&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -654,7 +643,7 @@ Voici des exemples de comment faire :</p>
 <p>Ce type d’erreur se produit quand vous essayez d’utiliser une bibliothèque / un package non importé.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;fonctions&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ModuleNotFoundError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">&#39;fonctions&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -662,7 +651,7 @@ Voici des exemples de comment faire :</p>
 <p>Dans cet exemple, c’est parce que le chemin d’accès au fichier <strong><code class="docutils literal notranslate"><span class="pre">fonctions.py</span></code></strong> n’est pas spécifié correctement. la ligne de code suivante doit être modifiée :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;C:/Users/malaka/Documents/BDD&quot;</span><span class="p">)</span>  <span class="c1"># à adapter a partir de malaka</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;C:/Users/malaka/Documents/BDD&quot;</span><span class="p">)</span>  <span class="c1"># à adapter a partir de malaka</span>
 </pre></div>
 </div>
 </div>
@@ -672,7 +661,7 @@ Voici des exemples de comment faire :</p>
 <h2>5- Erreur AttributeError<a class="headerlink" href="#erreur-attributeerror" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;NoneType&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;cursor&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;NoneType&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;cursor&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -683,7 +672,7 @@ Voici des exemples de comment faire :</p>
 <h2>6- Erreur psycopg2.errors.UniqueViolation<a class="headerlink" href="#erreur-psycopg2-errors-uniqueviolation" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>psycopg2.errors.UniqueViolation: ERREUR:  la valeur d&#39;une clé dupliquée rompt la contrainte unique « age_demandeur_attribution_pkey »
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>psycopg2.errors.UniqueViolation: ERREUR:  la valeur d&#39;une clé dupliquée rompt la contrainte unique « age_demandeur_attribution_pkey »
 DETAIL:  La clé « (indiceposition)=(15340031522020) » existe déjà.
 </pre></div>
 </div>

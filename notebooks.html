@@ -488,7 +488,7 @@ For example, here’s some sample Matplotlib code:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.pyplot._IonContext at 0x1fdb7564f70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.pyplot._IonContext at 0x1cbe7f738b0&gt;
 </pre></div>
 </div>
 </div>
@@ -518,6 +518,33 @@ For example, here’s some sample Matplotlib code:</p>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/notebooks_2_0.png" src="_images/notebooks_2_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ghp-import -n -p -f _build/html
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: unable to access &#39;https://github.com/Malaka34/docodh.git/&#39;: Failed to connect to github.com port 443 after 2109 ms: Connection refused
+Traceback (most recent call last):
+  File &quot;C:\ProgramData\Anaconda3\lib\runpy.py&quot;, line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File &quot;C:\ProgramData\Anaconda3\lib\runpy.py&quot;, line 87, in _run_code
+    exec(code, run_globals)
+  File &quot;C:\ProgramData\Anaconda3\Scripts\ghp-import.exe\__main__.py&quot;, line 7, in &lt;module&gt;
+  File &quot;C:\ProgramData\Anaconda3\lib\site-packages\ghp_import.py&quot;, line 300, in main
+    ghp_import(args.pop(&quot;directory&quot;), **args)
+  File &quot;C:\ProgramData\Anaconda3\lib\site-packages\ghp_import.py&quot;, line 283, in ghp_import
+    git.check_call(&#39;push&#39;, opts[&#39;remote&#39;], opts[&#39;branch&#39;], &#39;--force&#39;)
+  File &quot;C:\ProgramData\Anaconda3\lib\site-packages\ghp_import.py&quot;, line 119, in check_call
+    sp.check_call([&#39;git&#39;] + list(args), **kwargs)
+  File &quot;C:\ProgramData\Anaconda3\lib\subprocess.py&quot;, line 373, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command &#39;[&#39;git&#39;, &#39;push&#39;, &#39;origin&#39;, &#39;gh-pages&#39;, &#39;--force&#39;]&#39; returned non-zero exit status 128.
+</pre></div>
+</div>
 </div>
 </div>
 <p>There is a lot more that you can do with outputs (such as including interactive outputs)
