@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# In[ ]:
+
+
+#!/usr/bin/env python
+# coding: utf-8
+
 
 
 def connexion(Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port):
@@ -447,12 +453,15 @@ def checkingModalites(fichier_A_traiter, nom_Fichier_Modalite, path_vars):
             ligne = Modalites.loc[(Modalites['CodeModalEXT'] == fichier_A_traiter.columns[modalite].lower())]
             #print(ligne)
             ligne = ligne.reset_index(drop=True)
-            listeCodeModa= listeCodeModa.append({
+
+            listeCodeModa = pd.concat([
+                listeCodeModa, pd.DataFrame.from_records([{
                     'code': ligne.CodeModalID[0],
                     'noms': fichier_A_traiter.columns[modalite],
                     'Lib_long': ligne.Libelle_long[0],
-                    'categ_regroupement': ligne.Categ_regroupement[0]
-                }, ignore_index=True)
+                    'categ_regroupement': ligne.Categ_regroupement[0] 
+                }])
+            ])
 
 
         else:
@@ -466,21 +475,27 @@ def checkingModalites(fichier_A_traiter, nom_Fichier_Modalite, path_vars):
             if(categ_regroupement == ''):
                 categ_regroupement = fichier_A_traiter.columns[modalite]
 
-            listeCodeModa= listeCodeModa.append({
+
+            
+            listeCodeModa = pd.concat([
+                listeCodeModa, pd.DataFrame.from_records([{
                     'code': len(Modalites)+1,
                     'noms': fichier_A_traiter.columns[modalite],
-                'Lib_long': lib,
-                'categ_regroupement': categ_regroupement
-                },ignore_index=True)
+                    'Lib_long': lib,
+                    'categ_regroupement': categ_regroupement 
+                }])
+            ])
 
-            Modalites = Modalites.append({
-                'CodeModalID' : len(Modalites)+1,
-                'CodeModalEXT' : fichier_A_traiter.columns[modalite].lower(),
-                'LibelleModal' : fichier_A_traiter.columns[modalite],
-                'Libelle_long' : lib,
-                'Categ_regroupement': categ_regroupement
-
-            }, ignore_index=True)
+            
+            Modalites = pd.concat([
+                Modalites, pd.DataFrame.from_records([{
+                    'CodeModalID' : len(Modalites)+1,
+                    'CodeModalEXT' : fichier_A_traiter.columns[modalite].lower(),
+                    'LibelleModal' : fichier_A_traiter.columns[modalite],
+                    'Libelle_long' : lib,
+                    'Categ_regroupement': categ_regroupement 
+                }])
+            ])
             
     Modalites.to_csv(path_vars+nom_Fichier_Modalite,index=False,sep=';', encoding='utf-8') 
     return listeCodeModa
@@ -526,15 +541,17 @@ def checkingVariable(csv_files,nom_Fichier_Variable,source,path_vars ):
             lib = input()
             if(lib == ''):
                 lib = csv_files[Variable]
-            Variables = Variables.append({
-                'CodeVarID' : len(Variables)+1,
-                'CodeVarEXT' : unidecode.unidecode(csv_files[Variable]).lower(),
-                'LibAxeAnalyse' : lib,
-                'Origine' : source.lower()
-                
 
-
-            }, ignore_index=True)
+            
+            Variables = pd.concat([
+                Variables, pd.DataFrame.from_records([{ 
+                    'CodeVarID' : len(Variables)+1,
+                    'CodeVarEXT' : unidecode.unidecode(csv_files[Variable]).lower(),
+                    'LibAxeAnalyse' : lib,
+                    'Origine' : source.lower() 
+                }])
+            ])
+            
                 
             print('la variable {} à été insérée \n '.format(csv_files[Variable]))   
     Variables.to_csv(path_vars+nom_Fichier_Variable,index=False,sep=';', encoding='utf-8')
@@ -565,10 +582,6 @@ def traitementDonnees(fichier_A_traiter,nomFichier,codevarid,annee,nom_Fichier_M
     import glob
     import pandas as pd
     import os
-    
-    
-    
-    
 
     #Création de la table à exporter plus tard
     newTabTraite = pd.DataFrame(columns = ['CodeVarID', 'Annee', 'codeEntite', 
@@ -590,22 +603,26 @@ def traitementDonnees(fichier_A_traiter,nomFichier,codevarid,annee,nom_Fichier_M
         codeModa = []
         code_ent = tabATraite['codeEntite'][ligne]
         
+        
 
         for col in range(1,len(listeCodeModa),1):
             valeur.append(tabATraite.iloc[ligne][col])
-            codeModa.append(listeCodeModa['code'][col])
+            codeModa.append(listeCodeModa[col]['code'])
 
         #insertion de la ligne
         for i in range(len(valeur)):
-            newTabTraite=newTabTraite.append({
-                'CodeVarID':codevarid,
-                'Annee':annee,
-                'Echelle': echelle,
-                'codeEntite':code_ent,
-                'CodeModalID':codeModa[i],
-                'Valeur': valeur[i],
-                'IndicePosition': str(codevarid)+str(code_ent)+str(codeModa[i])+str(annee)
-            },ignore_index=True)
+            
+            newTabTraite = pd.concat([
+                newTabTraite, pd.DataFrame.from_records([{ 
+                    'CodeVarID':codevarid,
+                    'Annee':annee,
+                    'Echelle': echelle,
+                    'codeEntite':code_ent,
+                    'CodeModalID':codeModa[i],
+                    'Valeur': valeur[i],
+                    'IndicePosition': str(codevarid)+str(code_ent)+str(codeModa[i])+str(annee)
+                }])
+            ])
 
 
         #Remplacement des cellules vides par des zeros
@@ -749,13 +766,17 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
     csv_files = glob.glob(cheminCsv )
     dfs = [pd.read_csv(x, sep=';', encoding='utf-8') for x in csv_files]
 
-    cheminbar = chemin + '\\'
+    #cheminbar = chemin + '\\'
 
     #removing "DossierFichiersbrutesCsv\\" files's names 
     for fsl in range(len(csv_files)):
-        csv_files[fsl]= csv_files[fsl].replace(cheminbar,'')
+
+        csv_files[fsl]= csv_files[fsl].replace(chemin,'')
+        csv_files[fsl]= csv_files[fsl].replace('//','')
+        csv_files[fsl]= csv_files[fsl].replace('/','')
+
         csv_files[fsl]= csv_files[fsl].replace('.csv','')
-        
+
     ############## CHECKING LA LISTE DES VARIABLES ##########################
     
     # téléchargement du fichier Variables_FSL.csv', qui se trouve dans le dossier 'vars'
@@ -1084,8 +1105,7 @@ def versementDonnes2(Nom_base,Nom_utilisateur,mot_de_passe,nom_host,port,source,
 
                 con = fonctions.connexion(Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port)
                 cur = con.cursor()
-                sqlCheckTable = "SELECT EXISTS ( SELECT FROM pg_tables WHERE schemaname = "+\
-                            "{nom_schema_donnees} AND tablename  = {table} );"
+                sqlCheckTable = "SELECT EXISTS ( SELECT FROM pg_tables WHERE schemaname = "+                            "{nom_schema_donnees} AND tablename  = {table} );"
                 sqlCheckTable= sqlCheckTable.format(nom_schema_donnees="'"+nom_schema_donnees+"'", table="'"+table+"'")
                 cur.execute(sqlCheckTable)
                 result = cur.fetchall()
@@ -1324,9 +1344,7 @@ def dict_cleEtrangere(nom_schema_donnees,Nom_base,Nom_utilisateur,mot_de_passe,n
     # getting all the foreign keys per table
     con = connexion(Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port)
     cur = con.cursor()
-    sqlCheckTable = "SELECT  INFORMATION_SCHEMA.TABLE_CONSTRAINTS.constraint_name ,INFORMATION_SCHEMA.TABLE_CONSTRAINTS.table_name "+\
-                    "FROM  INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_TYPE='FOREIGN KEY' "+\
-                    "AND INFORMATION_SCHEMA.TABLE_CONSTRAINTS.table_schema = {nom_schema_donnees}"
+    sqlCheckTable = "SELECT  INFORMATION_SCHEMA.TABLE_CONSTRAINTS.constraint_name ,INFORMATION_SCHEMA.TABLE_CONSTRAINTS.table_name "+                    "FROM  INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_TYPE='FOREIGN KEY' "+                    "AND INFORMATION_SCHEMA.TABLE_CONSTRAINTS.table_schema = {nom_schema_donnees}"
 
     sqlCheckTable= sqlCheckTable.format(nom_schema_donnees="'"+nom_schema_donnees+"'")
     cur.execute(sqlCheckTable)
@@ -1401,9 +1419,7 @@ def creationVueSchema (Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port, 
         table_name=name_avec_schema+"_Vue"
 
         # les modalités présentes dans la table
-        sqlQuery_modalites = "select distinct {modalites}.codemodalext "+\
-                                "from {modalites}, {name_avec_schema} "+\
-                                "where {modalites}.codemodalid = {name_avec_schema}.codemodalid"
+        sqlQuery_modalites = "select distinct {modalites}.codemodalext "+                                "from {modalites}, {name_avec_schema} "+                                "where {modalites}.codemodalid = {name_avec_schema}.codemodalid"
 
         sqlQuery_modalites = sqlQuery_modalites.format(name_avec_schema=name_avec_schema, table_name=table_name,
                               modalites= 'modalites_'+suffix_nom_schema.lower(),
@@ -1476,3 +1492,4 @@ def creationVueSchema (Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port, 
 
 ##########################################################################################################################################
 ##########################################################################################################################################
+
