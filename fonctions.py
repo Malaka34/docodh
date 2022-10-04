@@ -667,7 +667,7 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
     import shutil # to move files 
     import pathlib # to get the path of files
     import fonctions
-    from tqdm import tqdm
+    #from tqdm import tqdm
     ################################################################################################################
 
     print("Ces données qui vont être traité possèdent t'ils déja un schéma non vide dans pgAdmin ? \n",
@@ -792,7 +792,7 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
     #création d'un dossier
     os.mkdir('DossierFichiersTraités')
     
-    for file in tqdm(range(len(dfs))):
+    for file in range(len(dfs)):
         #print(file, "file")
         nomFichier= csv_files_sans_accent_ni_escpace[file]
         print(' nom ::::: ', nomFichier)
@@ -888,7 +888,7 @@ def versementDonnes2(Nom_base,Nom_utilisateur,mot_de_passe,nom_host,port,source,
     import csv
     import psycopg2
     import traceback
-    from tqdm import tqdm
+    #from tqdm import tqdm
     ######## STEP 1 ::: CHOIX DU TRAITEMENT SELON SI C'EST UNE NOUVELLE SOURCE OU NON #####################
     variable = nom_Fichier_Variable.replace('.csv','')
     modalite = nom_Fichier_Modalite.replace('.csv','')
@@ -1004,7 +1004,7 @@ def versementDonnes2(Nom_base,Nom_utilisateur,mot_de_passe,nom_host,port,source,
         for i in range(len(csv_files)):
             csv_files[i]= csv_files[i].replace('DossierFichiersTraités\\','')
         
-        for fichier in tqdm(range(len(csv_files))):
+        for fichier in range(len(csv_files)):
 
             fichierCSV = dfs[fichier]
             ClePK = fichierCSV.columns[-2]
@@ -1089,7 +1089,7 @@ def versementDonnes2(Nom_base,Nom_utilisateur,mot_de_passe,nom_host,port,source,
             for i in range(len(csv_files)):
                 csv_files[i]= csv_files[i].replace('DossierFichiersTraités\\','')
 
-            for fichier in tqdm(range(len(csv_files))):
+            for fichier in range(len(csv_files)):
 
                 fichierCSV = dfs[fichier]
                 fichierCSVpath = path[fichier]
@@ -1397,7 +1397,7 @@ def creationVueSchema (Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port, 
     """
     ######## IMPORT #############################
     import psycopg2
-    from tqdm import tqdm
+    #from tqdm import tqdm
     import pandas as pd
     
     ######## STEP 1 ::: RECUPERATION DES TABLES PRINCIPALES DANS LE SCHEMA ####################################################################################
@@ -1412,7 +1412,7 @@ def creationVueSchema (Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port, 
     ######## STEP 2 ::: RECUPERATION DES MODALITES A REPRESENTER PAR TABLE ####################################################################################
     con = connexion(Nom_base, Nom_utilisateur, mot_de_passe, nom_host, port)
 
-    for tab in tqdm(range(len(table_names))):
+    for tab in range(len(table_names)):
         #nomenclature 
         view_name = table_names[tab]
         name_avec_schema = nom_schema_donnees+"."+view_name
