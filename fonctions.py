@@ -446,7 +446,7 @@ def checkingModalites(fichier_A_traiter, nom_Fichier_Modalite, path_vars):
     # checking 
     
     for modalite in range(len(fichier_A_traiter.columns)):
-        print('Modalité recherché :', fichier_A_traiter.columns[modalite], '\n')
+        print('Modalité recherchée :', fichier_A_traiter.columns[modalite], '\n')
         # test
         if(fichier_A_traiter.columns[modalite].lower() in Modalites['CodeModalEXT'].tolist() ):
             print('trouvé \n')
@@ -503,7 +503,6 @@ def checkingModalites(fichier_A_traiter, nom_Fichier_Modalite, path_vars):
 ##################################################################################################################################
 ##################################################################################################################################
 def checkingVariable(csv_files,nom_Fichier_Variable,source,path_vars ):
-    import unidecode
     '''
     Données : csv_files = liste des fichiers csv dont les variables sont à checker,
     
@@ -516,45 +515,44 @@ def checkingVariable(csv_files,nom_Fichier_Variable,source,path_vars ):
     Résultat : retourne la liste des modalités avec toutes les eventuelles nouvelles modalités, pour les fichiers FSL
     '''
     import pandas as pd
+    import unidecode
     
+    # téléchargement du fichier Variables_.csv', qui se trouve dans le dossier 'vars'
     Variables = pd.read_csv(path_vars+nom_Fichier_Variable, delimiter=';', encoding='utf-8')
+    
+    # checking 
     for Variable in range(len(csv_files)):
-        trouve = False
-        i = 0
-        new_var = False
-        if(len(Variables)==0):
-            new_var = True
+        print('variable recherchée : {}'.format(csv_files[Variable], '\n'))
+        
+        #test
+        if(unidecode.unidecode(csv_files[Variable]).lower() in Variables['CodeVarEXT'].tolist() ):
+            print('trouvé \n')
+            #ligne = Variables.loc[(Variables['CodeVarEXT'] == unidecode.unidecode(csv_files[Variable]).lower()
+            #print(ligne)
+            #ligne = ligne.reset_index(drop=True)
+                                   
         else:
-            while(i<len(Variables) and trouve == False):
-                #print('variable existante : {}'.format(Variables.CodeVarEXT[i]))
-                #print('variable recherchée : {}'.format(csv_files[Variable].lower()))
-                if(unidecode.unidecode(csv_files[Variable]).lower() == unidecode.unidecode(Variables.CodeVarEXT[i]).lower()):
-                    trouve = True
-                    
-                if(i == len(Variables)-1 and trouve == False): 
-                    new_var = True
-                    #print('second true')
-                i+=1
-        if(new_var == True):
-            print('nouvelle variable : {}'.format(csv_files[Variable]))
+            print('nouveau \n')
+                                   
             print('Veuillez saisir le libellé long de cette variable')
             lib = input()
             if(lib == ''):
                 lib = csv_files[Variable]
 
-            
+            # insertion dans le dataframe des variables
             Variables = pd.concat([
-                Variables, pd.DataFrame.from_records([{ 
-                    'CodeVarID' : len(Variables)+1,
-                    'CodeVarEXT' : unidecode.unidecode(csv_files[Variable]).lower(),
-                    'LibAxeAnalyse' : lib,
-                    'Origine' : source.lower() 
-                }])
-            ])
+                    Variables, pd.DataFrame.from_records([{ 
+                        'CodeVarID' : len(Variables)+1,
+                        'CodeVarEXT' : unidecode.unidecode(csv_files[Variable]).lower(),
+                        'LibAxeAnalyse' : lib,
+                        'Origine' : source.lower() 
+                    }])
+                ])
+            print('la variable {} à été insérée \n '.format(csv_files[Variable]))
             
-                
-            print('la variable {} à été insérée \n '.format(csv_files[Variable]))   
-    Variables.to_csv(path_vars+nom_Fichier_Variable,index=False,sep=';', encoding='utf-8')
+        # enregistrement des modifs
+        Variables.to_csv(path_vars+nom_Fichier_Variable,index=False,sep=';', encoding='utf-8')
+
 
     
     
@@ -828,16 +826,9 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
                                        'CodeModalID':[1]})
         #posseder = posseder.append(tableNomcomEPCI,ignore_index = True)
         #posseder = posseder.append(fichierMask,ignore_index = True)
-        posseder = pd.concat([
-                posseder, pd.DataFrame.from_records([{ 
-                    tableNomcomEPCI
-                }])
-            ])
-        posseder = pd.concat([
-                posseder, pd.DataFrame.from_records([{ 
-                    fichierMask
-                }])
-            ])
+        posseder = pd.concat([posseder,tableNomcomEPCI],ignore_index = True)
+        posseder = pd.concat([posseder,fichierMask],ignore_index = True)
+
 
     posseder['CC']= posseder['CodeVarID'].map(str)+posseder['CodeModalID'].map(str)
     posseder.drop_duplicates(subset ='CC',
