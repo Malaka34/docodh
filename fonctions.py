@@ -772,6 +772,7 @@ def traitementDonneesComplet(chemin,annee,nom_Fichier_Variable,source,nom_Fichie
         csv_files[fsl]= csv_files[fsl].replace(chemin,'')
         csv_files[fsl]= csv_files[fsl].replace('//','')
         csv_files[fsl]= csv_files[fsl].replace('/','')
+        csv_files[fsl]= csv_files[fsl].replace('\\','')
 
         csv_files[fsl]= csv_files[fsl].replace('.csv','')
 
